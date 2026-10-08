@@ -8,8 +8,8 @@ services:
     restart: unless-stopped
     ports:
       - "8080:8080"
-    env_file:
-      - .env
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db:5432/Node-App
     networks:
       - app-network
     depends_on:
@@ -18,12 +18,12 @@ services:
 
   db:
     image: postgres:15-alpine
-    container_name: dev-inbuildify-db
+    container_name: Node-App-db
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
-      POSTGRES_DB: ${DB_NAME:-inbuildify-dev}
+      POSTGRES_DB: ${DB_NAME:-Node-App}
     ports:
       - "5432:5432"
     volumes:
@@ -33,7 +33,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: dev-inbuildify-redis
+    container_name: Node-App-redis
     restart: unless-stopped
     ports:
       - "6379:6379"
