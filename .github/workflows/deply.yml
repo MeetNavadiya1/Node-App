@@ -25,6 +25,6 @@ jobs:
 
             git pull origin main
 
-            docker compose up -d --build --force-recreate --no-deps app postgres redis
+            docker compose up -d --build --force-recreate --no-deps app db redis
 
             docker image prune -af
